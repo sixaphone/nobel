@@ -4,14 +4,21 @@ import { UserEntity } from '@db/entities/user.entity';
 import { BcryptPasswordService } from '@auth/bcrypt-password.service';
 import { JwtService } from '@nestjs/jwt';
 import { RegisterDto } from '@auth/dto/register.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class AuthService {
+  private readonly users: UserRepository;
+
   constructor(
-    private readonly users: UserRepository,
+    @InjectRepository(UserEntity)
+    users: Repository<UserEntity>,
     private readonly jwt: JwtService,
     private readonly bcryptPasswordService: BcryptPasswordService,
-  ) {}
+  ) {
+    this.users = users.extend(UserRepository);
+  }
 
   public async validate(
     email: string,

@@ -18,7 +18,9 @@ export class ClassMapper {
     targetClass: { new (...args: any[]): T },
     transformFn?: (dto: T) => T,
   ): T | T[] {
-    const dto = plainToClass(targetClass, instanceToPlain(plain));
+    const dto = plainToClass(targetClass, instanceToPlain(plain), {
+      excludeExtraneousValues: true,
+    });
 
     return transformFn ? transformFn(dto) : dto;
   }

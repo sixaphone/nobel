@@ -12,6 +12,7 @@ services:
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=nobel
     volumes:
       - ./data/postgresql:/var/lib/postgresql
     ports:

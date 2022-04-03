@@ -7,9 +7,10 @@ export default registerAs(
   ConfigKey.DATABASE,
   (): PostgresConnectionOptions => ({
     entities: Entities,
+    name: 'default',
     type: 'postgres',
     logging: 'all',
     url: process.env.DATABASE_CONNECTION_URL,
-    synchronize: !!process.env.DATABASE_SYNCRONIZE,
+    synchronize: process.env.DATABASE_SYNCRONIZE === 'true',
   }),
 );
