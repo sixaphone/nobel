@@ -5,6 +5,8 @@ import { ConfigService } from '@nestjs/config';
 import { ClassMapper } from '@common/mapper/class.mapper';
 import { BcryptPasswordService } from '@auth/bcrypt-password.service';
 import { AuthController } from '@auth/auth.controller';
+import { ConfigKey } from '@config/config-key.enum';
+import { JwtConfig } from '@config/jwt.config';
 
 @Module({
   imports: [
@@ -12,10 +14,8 @@ import { AuthController } from '@auth/auth.controller';
     PassportModule,
     JwtModule.registerAsync({
       inject: [ConfigService],
-      useFactory: (config: ConfigService) => ({
-        secret: config.get<string>('jwt.secret'),
-        signOptions: { expiresIn: config.get<string>('jwt.expiresIn') },
-      }),
+      useFactory: (config: ConfigService) =>
+        config.get<JwtConfig>(ConfigKey.JWT),
     }),
   ],
   providers: [BcryptPasswordService],

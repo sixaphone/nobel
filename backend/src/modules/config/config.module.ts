@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule as NestConfigModule } from '@nestjs/config';
-import jwtConfig from './jwt.config';
+import jwt from './jwt.config';
+import database from './database.config';
 
 @Module({
   imports: [
     NestConfigModule.forRoot({
       isGlobal: true,
-      load: [jwtConfig],
+      load: [jwt, database],
     }),
   ],
 })
