@@ -1,26 +1,51 @@
 import { Injectable } from '@nestjs/common';
-import {AuthDetailsDto} from "@auth/dto/auth.details.dto";
+import { UserRepository } from '@db/repositories/user.repository';
+import { UserEntity } from '@db/entities/user.entity';
+import { BcryptPasswordService } from '@auth/bcrypt-password.service';
+import { JwtService } from '@nestjs/jwt';
+import { RegisterDto } from '@auth/dto/register.dto';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private users: UsersService,
-    private jwtService: JwtService,
+    private readonly users: UserRepository,
+    private readonly jwt: JwtService,
+    private readonly bcryptPasswordService: BcryptPasswordService,
   ) {}
 
-  async validate(email: string, pass: string): Promise<AuthDetailsDto> {
-    const user = await this.usersService.findOne(username);
-    if (user && user.password === pass) {
-      const { password, ...result } = user;
-      return result;
+  public async validate(
+    email: string,
+    password: string,
+  ): Promise<UserEntity> | never {
+    const user = await this.users.findByEmail(email);
+
+    if (
+      !user ||
+      !(await this.bcryptPasswordService.verify(password, user.password))
+    ) {
+      throw new Error('Invalid credentials');
     }
-    return null;
+
+    return user;
   }
 
-  async login(user: any) {
-    const payload = { username: user.username, sub: user.userId };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
+  public async register(payload: RegisterDto): Promise<UserEntity> {
+    const password = await this.bcryptPasswordService.hash(payload.password);
+
+    return this.users.save(
+      this.users.create({
+        ...payload,
+        password,
+      }),
+    );
+  }
+
+  public sign(user: UserEntity): Promise<string> {
+    return this.jwt.signAsync({
+      id: user.id,
+      email: user.email,
+      type: user.type,
+      fullName: user.fullName,
+    });
   }
 }

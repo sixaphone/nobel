@@ -14,5 +14,5 @@ export class AuthDetailsDto {
   public readonly email: string;
 
   @IsString()
-  public readonly accessToken: string;
+  public accessToken: string;
 }
