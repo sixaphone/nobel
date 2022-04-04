@@ -1,4 +1,4 @@
-import { Controller, Param } from '@nestjs/common';
+import { Param } from '@nestjs/common';
 import { UserService } from '@user/user.service';
 import { ClassMapper } from '@common/mapper/class.mapper';
 import { UserDetailsDto } from '@user/dto/user.details.dto';
