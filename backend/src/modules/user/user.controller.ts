@@ -16,7 +16,7 @@ export class UserController {
   ) {}
 
   @ApiGet('/', { responseType: [UserDetailsDto] })
-  @Auth([UserType.MANAGER, UserType.ADMIN])
+  @Auth([UserType.MANAGER, UserType.MANAGER])
   public async listUsers(): Promise<UserDetailsDto[]> {
     const users: UserEntity[] = await this.userService.listUsers();
 
