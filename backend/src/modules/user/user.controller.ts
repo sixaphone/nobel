@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Param } from '@nestjs/common';
 import { UserService } from '@user/user.service';
 import { ClassMapper } from '@common/mapper/class.mapper';
 import { UserDetailsDto } from '@user/dto/user.details.dto';
@@ -7,8 +7,9 @@ import { ApiParam } from '@nestjs/swagger';
 import { Auth } from '@common/decorators/auth.decorator';
 import { ApiGet } from '@common/decorators/api.get.decorator';
 import { UserType } from '@user/user-type.enum';
+import { ApiController } from '@common/decorators/api.controller.decorator';
 
-@Controller('/users')
+@ApiController('/users', 'Users')
 export class UserController {
   constructor(
     private readonly mapper: ClassMapper,

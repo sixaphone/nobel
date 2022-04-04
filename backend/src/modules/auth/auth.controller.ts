@@ -8,8 +8,9 @@ import { RegisterDto } from '@auth/dto/register.dto';
 import { Auth } from '@common/decorators/auth.decorator';
 import { UserType } from '@user/user-type.enum';
 import { ApiPost } from '@common/decorators/api.post.decorator';
+import { ApiController } from '@common/decorators/api.controller.decorator';
 
-@Controller()
+@ApiController('', 'Auth')
 export class AuthController {
   constructor(private mapper: ClassMapper, private auth: AuthService) {}
 
