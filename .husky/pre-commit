@@ -1,5 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-cd ./backend && npx lint-staged
-#yarn lint-staged
+cd ./backend && node ../node_modules/.bin/lint-staged
+cd ..
