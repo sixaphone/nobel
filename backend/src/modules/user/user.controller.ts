@@ -5,7 +5,8 @@ import { UserDetailsDto } from '@user/dto/user.details.dto';
 import { UserEntity } from '@db/entities/user.entity';
 import { ApiParam } from '@nestjs/swagger';
 import { Auth } from '@common/decorators/auth.decorator';
-import { User } from '@common/decorators/user.decorator';
+import { ApiGet } from '@common/decorators/api.get.decorator';
+import { UserType } from '@user/user-type.enum';
 
 @Controller('/users')
 export class UserController {
@@ -14,23 +15,22 @@ export class UserController {
     private readonly userService: UserService,
   ) {}
 
-  @Get()
-  @Auth()
+  @ApiGet('/', { responseType: [UserDetailsDto] })
+  @Auth([UserType.ADMIN, UserType.MANAGER])
   public async listUsers(): Promise<UserDetailsDto[]> {
     const users: UserEntity[] = await this.userService.listUsers();
 
     return this.mapper.map(users, UserDetailsDto);
   }
 
-  @Get('/:userId')
-  @Auth()
+  @ApiGet('/:userId', { responseType: UserDetailsDto })
+  @Auth([UserType.ADMIN, UserType.MANAGER])
   @ApiParam({
     name: 'userId',
     type: String,
   })
   public async getUserById(
     @Param('userId') userId: string,
-    @User() authUser: UserEntity,
   ): Promise<UserDetailsDto> {
     const user: UserEntity = await this.userService.getUserById(userId);
 

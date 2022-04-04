@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller } from '@nestjs/common';
 import { AuthService } from '@auth/auth.service';
 import { LoginDto } from '@auth/dto/login.dto';
 import { AuthDetailsDto } from '@auth/dto/auth.details.dto';
@@ -7,12 +7,13 @@ import { UserEntity } from '@db/entities/user.entity';
 import { RegisterDto } from '@auth/dto/register.dto';
 import { Auth } from '@common/decorators/auth.decorator';
 import { UserType } from '@user/user-type.enum';
+import { ApiPost } from '@common/decorators/api.post.decorator';
 
 @Controller()
 export class AuthController {
   constructor(private mapper: ClassMapper, private auth: AuthService) {}
 
-  @Post('/login')
+  @ApiPost('/login', { responseType: AuthDetailsDto })
   public async login(@Body() payload: LoginDto): Promise<AuthDetailsDto> {
     const user: UserEntity = await this.auth.validate(
       payload.email,
@@ -22,7 +23,7 @@ export class AuthController {
     return this.toDetails(user);
   }
 
-  @Post('/register')
+  @ApiPost('/register', { responseType: AuthDetailsDto })
   @Auth([UserType.ADMIN, UserType.MANAGER])
   public async register(@Body() payload: RegisterDto): Promise<AuthDetailsDto> {
     const user: UserEntity = await this.auth.register(payload);
