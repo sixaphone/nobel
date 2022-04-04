@@ -16,6 +16,7 @@ async function bootstrap() {
     .setTitle('Nobel')
     .setDescription('The nobel API description')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, swagger);
   SwaggerModule.setup('api/docs', app, document);

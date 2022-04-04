@@ -22,6 +22,7 @@
       "@db/*": ["./src/db/*"],
       "@user/*": ["./src/modules/user/*"],
       "@auth/*": ["./src/modules/auth/*"],
+      "@jwt/*": ["./src/modules/jwt/*"],
       "@config/*": ["./src/modules/config/*"]
     }
   }

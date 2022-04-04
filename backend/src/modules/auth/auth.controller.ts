@@ -5,6 +5,8 @@ import { AuthDetailsDto } from '@auth/dto/auth.details.dto';
 import { ClassMapper } from '@common/mapper/class.mapper';
 import { UserEntity } from '@db/entities/user.entity';
 import { RegisterDto } from '@auth/dto/register.dto';
+import { Auth } from '@common/decorators/auth.decorator';
+import { UserType } from '@user/user-type.enum';
 
 @Controller()
 export class AuthController {
@@ -21,6 +23,7 @@ export class AuthController {
   }
 
   @Post('/register')
+  @Auth([UserType.ADMIN, UserType.MANAGER])
   public async register(@Body() payload: RegisterDto): Promise<AuthDetailsDto> {
     const user: UserEntity = await this.auth.register(payload);
 

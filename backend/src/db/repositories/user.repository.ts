@@ -31,7 +31,7 @@ export const UserRepository: Users = {
     }
   },
 
-  findByEmail(email: string): Promise<UserEntity> {
+  findByEmail(email: string): Promise<UserEntity | undefined> {
     return this.createQueryBuilder('users')
       .where('users.email = :email')
       .setParameters({ email })

@@ -6,6 +6,14 @@ import { JwtService } from '@nestjs/jwt';
 import { RegisterDto } from '@auth/dto/register.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { UserType } from '@user/user-type.enum';
+
+export interface JwtSignOptions {
+  id: string;
+  email: string;
+  type: UserType;
+  fullName: string;
+}
 
 @Injectable()
 export class AuthService {
@@ -53,6 +61,6 @@ export class AuthService {
       email: user.email,
       type: user.type,
       fullName: user.fullName,
-    });
+    } as JwtSignOptions);
   }
 }
