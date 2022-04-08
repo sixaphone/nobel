@@ -2,12 +2,10 @@ import {
   Column,
   DeleteDateColumn,
   Entity,
-  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { JoinColumn } from 'typeorm/browser';
-import { ClientEntity } from '@db/entities/client.entity';
+import { ClientEntity } from './client.entity';
 
 @Entity('services')
 export class ServiceEntity {
@@ -20,7 +18,7 @@ export class ServiceEntity {
   @Column('varchar', { nullable: true })
   public code?: string;
 
-  @Column('double', { default: 0 })
+  @Column('float', { default: 0 })
   public cost: number;
 
   @OneToMany(() => ClientEntity, (c) => c.service)

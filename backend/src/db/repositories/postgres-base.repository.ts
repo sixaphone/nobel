@@ -1,10 +1,15 @@
-import { EntityNotFoundError, Repository } from 'typeorm';
+import { EntityNotFoundError } from 'typeorm';
 
-export abstract class PostgresBaseRepository<T> extends Repository<T> {
-  public async getById(id: string): Promise<T> | never {
+export interface PostgresBaseRepository<T> {
+  getById(id: string): Promise<T> | never;
+}
+
+export const PostgresBaseRepository: PostgresBaseRepository<any> = {
+  async getById<T>(id: string): Promise<T> | never {
     try {
       return await this.createQueryBuilder('entities')
         .where('entities.id = :id')
+        .withDeleted()
         .setParameters({ id })
         .getOneOrFail();
     } catch (e) {
@@ -14,5 +19,5 @@ export abstract class PostgresBaseRepository<T> extends Repository<T> {
 
       throw e;
     }
-  }
-}
+  },
+};

@@ -6,10 +6,10 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  JoinColumn,
 } from 'typeorm';
+import { ServiceEntity } from './service.entity';
 import { ClientType } from '@client/client-type.enum';
-import { ServiceEntity } from '@db/entities/service.entity';
-import { JoinColumn } from 'typeorm/browser';
 
 @Entity('clients')
 export class ClientEntity {

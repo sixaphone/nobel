@@ -1,4 +1,4 @@
-import { applyDecorators, Get } from '@nestjs/common';
+import { applyDecorators, Put } from '@nestjs/common';
 import {
   ApiForbiddenResponse,
   ApiNotFoundResponse,
@@ -6,9 +6,9 @@ import {
 } from '@nestjs/swagger';
 import { EndpointOptions } from '@common/decorators/decorator.interfaces';
 
-export function ApiGet(path: string, options: EndpointOptions = {}) {
+export function ApiPut(path: string, options: EndpointOptions = {}) {
   return applyDecorators(
-    Get(path),
+    Put(path),
     ApiOkResponse({
       description: 'Successful request',
       type: options?.responseType,
