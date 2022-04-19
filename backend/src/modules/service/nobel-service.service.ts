@@ -23,19 +23,8 @@ export class NobelServiceService {
     });
   }
 
-  public async getById(serviceId: string): Promise<ServiceEntity> {
-    const service = await this.services
-      .createQueryBuilder('services')
-      .withDeleted()
-      .where('services.id = :serviceId')
-      .setParameters({ serviceId })
-      .getOne();
-
-    if (!service) {
-      throw new NotFoundException();
-    }
-
-    return service;
+  public getById(serviceId: string): Promise<ServiceEntity> {
+    return this.services.getById(serviceId);
   }
 
   public async createService(
