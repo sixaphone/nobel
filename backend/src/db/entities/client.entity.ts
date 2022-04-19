@@ -11,6 +11,8 @@ import {
 import { ServiceEntity } from './service.entity';
 import { ClientType } from '@client/client-type.enum';
 
+export type ClientRelation = 'service';
+
 @Entity('clients')
 export class ClientEntity {
   @PrimaryGeneratedColumn('uuid')
@@ -19,37 +21,37 @@ export class ClientEntity {
   @Column('varchar')
   public name: string;
 
-  @Column('varchar')
-  public address: string;
+  @Column('varchar', { nullable: true })
+  public address?: string;
 
-  @Column('varchar')
-  public email: string;
+  @Column('varchar', { nullable: true })
+  public email?: string;
 
   @Column('varchar')
   public list: string;
 
-  @Column('varchar')
-  public phone: string;
+  @Column('varchar', { nullable: true })
+  public phone?: string;
 
-  @Column('varchar')
-  public comment: string;
+  @Column('varchar', { nullable: true })
+  public comment?: string;
 
   @Column('varchar')
   public image: string;
 
-  @Column('varchar')
-  public lat: string;
+  @Column('varchar', { nullable: true })
+  public lat?: string;
 
-  @Column('varchar')
-  public lng: string;
+  @Column('varchar', { nullable: true })
+  public lng?: string;
 
   @Column('enum', { enum: ClientType, default: ClientType.PRIVATE })
   public type: ClientType;
 
-  @Column('boolean')
+  @Column('boolean', { default: false })
   public isProblematic: boolean;
 
-  @Column('boolean')
+  @Column('boolean', { default: false })
   public isMarked: boolean;
 
   @Column('varchar')
