@@ -86,8 +86,8 @@ export class ClientController {
     return this.mapper.map(
       {
         code: 'ok',
-        message: 'Service Deleted',
-        title: 'Service Deleted',
+        message: 'Client Deleted',
+        title: 'Client Deleted',
       } as StatusDto,
       StatusDto,
     );

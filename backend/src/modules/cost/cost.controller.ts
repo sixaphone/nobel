@@ -74,8 +74,8 @@ export class CostController {
     return this.mapper.map(
       {
         code: 'ok',
-        message: 'Service Deleted',
-        title: 'Service Deleted',
+        message: 'Cost Deleted',
+        title: 'Cost Deleted',
       } as StatusDto,
       StatusDto,
     );

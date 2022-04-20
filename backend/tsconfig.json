@@ -24,6 +24,7 @@
       "@client/*": ["./src/modules/client/*"],
       "@service/*": ["./src/modules/service/*"],
       "@cost/*": ["./src/modules/cost/*"],
+      "@servicing-type/*": ["./src/modules/servicing-type/*"],
       "@auth/*": ["./src/modules/auth/*"],
       "@jwt/*": ["./src/modules/jwt/*"],
       "@config/*": ["./src/modules/config/*"]

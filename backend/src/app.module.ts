@@ -8,6 +8,7 @@ import { ConfigService } from '@nestjs/config';
 import { ConfigKey } from '@config/config-key.enum';
 import { ClientModule } from '@client/client.module';
 import { CostModule } from '@cost/cost.module';
+import { ServicingTypeModule } from '@servicing-type/servicing-type.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { CostModule } from '@cost/cost.module';
     CostModule,
     ClientModule,
     CostModule,
+    ServicingTypeModule,
   ],
 })
 export class AppModule {}
