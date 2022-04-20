@@ -9,6 +9,7 @@ import { ClientEntity, ClientRelation } from '@db/entities/client.entity';
 import { ClientCreateDto } from '@client/dto/client.create.dto';
 import { DateTime } from 'luxon';
 import { ClientUpdateDto } from '@client/dto/client.update.dto';
+import { ClientType } from '@client/client-type.enum';
 
 @Injectable()
 export class ClientService {
@@ -56,7 +57,7 @@ export class ClientService {
       this.clients.create({
         name: payload.name,
         serviceId: payload.serviceId,
-        type: payload.type,
+        type: payload.type ?? ClientType.PRIVATE,
         address: payload.address,
         comment: payload.comment,
         lat: payload.lat,

@@ -9,6 +9,7 @@ import { ConfigKey } from '@config/config-key.enum';
 import { ClientModule } from '@client/client.module';
 import { CostModule } from '@cost/cost.module';
 import { ServicingTypeModule } from '@servicing-type/servicing-type.module';
+import { ServicingModule } from '@servicing/servicing.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { ServicingTypeModule } from '@servicing-type/servicing-type.module';
     ClientModule,
     CostModule,
     ServicingTypeModule,
+    ServicingModule,
   ],
 })
 export class AppModule {}

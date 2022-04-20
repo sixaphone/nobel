@@ -18,8 +18,9 @@ export class ClientCreateDto {
   public readonly email?: string;
 
   @IsString()
+  @IsOptional()
   @ApiProperty()
-  public readonly list: string;
+  public readonly list?: string;
 
   @IsString()
   @IsOptional()
@@ -42,8 +43,9 @@ export class ClientCreateDto {
   public readonly lng?: string;
 
   @IsEnum(ClientType)
+  @IsOptional()
   @ApiProperty()
-  public readonly type: ClientType;
+  public readonly type?: ClientType;
 
   @IsUUID()
   @ApiProperty()
