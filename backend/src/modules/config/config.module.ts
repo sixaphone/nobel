@@ -7,6 +7,7 @@ import app from './app.config';
 @Module({
   imports: [
     NestConfigModule.forRoot({
+      envFilePath: ['.env', `.env.${process.env.NODE_ENV}`],
       isGlobal: true,
       load: [jwt, database, app],
     }),

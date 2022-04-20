@@ -9,7 +9,7 @@ export default registerAs(
     entities: Entities,
     name: 'default',
     type: 'postgres',
-    logging: 'all',
+    logging: process.env.NODE_ENV === 'development' ? 'all' : ['warn', 'error'],
     url: process.env.DATABASE_CONNECTION_URL,
     synchronize: process.env.DATABASE_SYNCRONIZE === 'true',
   }),

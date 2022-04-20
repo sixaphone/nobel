@@ -67,6 +67,7 @@ export class CostController {
 
   @ApiDelete('/:costId', { responseType: StatusDto })
   @Auth([UserType.ADMIN, UserType.MANAGER])
+  @HttpCode(204)
   @ApiParam({ name: 'costId', type: String })
   public async delete(@Param('costId') costId: string): Promise<StatusDto> {
     await this.costService.deleteCost(costId);
