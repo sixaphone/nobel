@@ -23,6 +23,7 @@
       "@user/*": ["./src/modules/user/*"],
       "@client/*": ["./src/modules/client/*"],
       "@service/*": ["./src/modules/service/*"],
+      "@cost/*": ["./src/modules/cost/*"],
       "@auth/*": ["./src/modules/auth/*"],
       "@jwt/*": ["./src/modules/jwt/*"],
       "@config/*": ["./src/modules/config/*"]

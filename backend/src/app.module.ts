@@ -6,8 +6,8 @@ import { ConfigModule } from '@config/config.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
 import { ConfigKey } from '@config/config-key.enum';
-import { ServiceModule } from '@service/service.module';
 import { ClientModule } from '@client/client.module';
+import { CostModule } from '@cost/cost.module';
 
 @Module({
   imports: [
@@ -19,8 +19,9 @@ import { ClientModule } from '@client/client.module';
     }),
     AuthModule,
     UserModule,
-    ServiceModule,
+    CostModule,
     ClientModule,
+    CostModule,
   ],
 })
 export class AppModule {}
