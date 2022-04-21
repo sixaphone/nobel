@@ -3,6 +3,7 @@ import { UserEntity } from '@db/entities/user.entity';
 import { EntityManager } from 'typeorm';
 import { UserType } from '@user/user-type.enum';
 import { v4 } from 'uuid';
+import { genSaltSync, hashSync } from 'bcrypt';
 
 export class UserFixture implements Fixture<UserEntity> {
   private _user: UserEntity;
@@ -21,7 +22,7 @@ export class UserFixture implements Fixture<UserEntity> {
       lastName: 'Doe',
       email: `${this._userId}@email.com`,
       type: this._type,
-      password: v4(),
+      password: hashSync('password', genSaltSync(10)),
       deletedAt: this._deleted ? new Date() : null,
     };
   }

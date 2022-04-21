@@ -1,6 +1,7 @@
-import { IsEmail, IsString } from 'class-validator';
+import { IsEmail, IsEnum, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
+import { UserType } from '@user/user-type.enum';
 
 export class AuthDetailsDto {
   @IsString()
@@ -22,6 +23,11 @@ export class AuthDetailsDto {
   @ApiProperty()
   @Expose()
   public readonly email: string;
+
+  @IsEnum(UserType)
+  @ApiProperty()
+  @Expose()
+  public readonly type: string;
 
   @IsString()
   @ApiProperty()

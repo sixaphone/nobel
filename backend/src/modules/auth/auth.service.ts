@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UserRepository } from '@db/repositories/user.repository';
 import { UserEntity } from '@db/entities/user.entity';
 import { BcryptPasswordService } from '@auth/bcrypt-password.service';
@@ -38,7 +38,7 @@ export class AuthService {
       !user ||
       !(await this.bcryptPasswordService.verify(password, user.password))
     ) {
-      throw new Error('Invalid credentials');
+      throw new UnauthorizedException('Invalid credentials');
     }
 
     return user;
