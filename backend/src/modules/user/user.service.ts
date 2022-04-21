@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { UserEntity } from '@db/entities/user.entity';
-import { UserRepository } from '@db/repositories/user.repository';
+import {
+  UserListWhereOptions,
+  UserRepository,
+} from '@db/repositories/user.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -15,8 +18,8 @@ export class UserService {
     this.users = users.extend(UserRepository);
   }
 
-  public listUsers(): Promise<UserEntity[]> {
-    return this.users.list();
+  public listUsers(where?: UserListWhereOptions): Promise<UserEntity[]> {
+    return this.users.list(where);
   }
 
   public getUserById(userId: string): Promise<UserEntity> | never {

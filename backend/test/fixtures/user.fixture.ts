@@ -8,6 +8,7 @@ export class UserFixture implements Fixture<UserEntity> {
   private _user: UserEntity;
   private readonly _type: UserType;
   private readonly _userId: string;
+  private readonly _deleted?: boolean;
 
   get instance(): Readonly<UserEntity> {
     return this._user;
@@ -21,12 +22,14 @@ export class UserFixture implements Fixture<UserEntity> {
       email: `${this._userId}@email.com`,
       type: this._type,
       password: v4(),
+      deletedAt: this._deleted ? new Date() : null,
     };
   }
 
-  constructor(data: { userId?: string; type?: UserType }) {
+  constructor(data: { userId?: string; type?: UserType; deleted?: boolean }) {
     this._userId = data.userId ?? v4();
     this._type = data.type ?? UserType.WORKER;
+    this._deleted = !!data.deleted;
   }
 
   public async init(manager: EntityManager): Promise<void> {

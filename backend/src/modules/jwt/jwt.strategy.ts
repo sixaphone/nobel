@@ -30,7 +30,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       payload.email,
     );
 
-    if (!user || user.deactivatedAt) {
+    if (!user) {
       throw new ForbiddenException();
     }
 

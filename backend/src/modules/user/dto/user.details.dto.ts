@@ -58,4 +58,10 @@ export class UserDetailsDto {
   @ApiProperty()
   @Expose()
   public readonly hiredAt: Date;
+
+  @IsDate()
+  @Type(() => Date)
+  @ApiProperty()
+  @Expose()
+  public readonly deletedAt: Date;
 }

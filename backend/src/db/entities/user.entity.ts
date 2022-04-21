@@ -1,6 +1,7 @@
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -42,14 +43,14 @@ export class UserEntity {
   @Column('date', { nullable: true })
   public hiredAt?: Date;
 
-  @Column('date', { nullable: true })
-  public deactivatedAt?: Date;
-
   @CreateDateColumn()
   public createdAt: Date;
 
   @UpdateDateColumn()
   public updatedAt: Date;
+
+  @DeleteDateColumn()
+  public deletedAt: Date;
 
   get fullName(): string {
     return `${this.firstName} ${this.lastName}`;

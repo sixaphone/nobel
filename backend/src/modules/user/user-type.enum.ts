@@ -5,3 +5,13 @@ export enum UserType {
   FINANCE = 'FINANCE',
   LOGISTIC = 'LOGISTIC',
 }
+
+export const ACCESSIBLE_TYPES = {
+  [UserType.ADMIN]: Object.values(UserType),
+  [UserType.MANAGER]: [
+    UserType.MANAGER,
+    UserType.WORKER,
+    UserType.FINANCE,
+    UserType.LOGISTIC,
+  ],
+};

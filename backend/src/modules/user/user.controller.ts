@@ -6,8 +6,9 @@ import { UserEntity } from '@db/entities/user.entity';
 import { ApiParam } from '@nestjs/swagger';
 import { Auth } from '@common/decorators/auth.decorator';
 import { ApiGet } from '@common/decorators/api.get.decorator';
-import { UserType } from '@user/user-type.enum';
+import { ACCESSIBLE_TYPES, UserType } from '@user/user-type.enum';
 import { ApiController } from '@common/decorators/api.controller.decorator';
+import { User } from '@common/decorators/user.decorator';
 
 @ApiController('/users', 'Users')
 export class UserController {
@@ -18,8 +19,11 @@ export class UserController {
 
   @ApiGet('/', { responseType: [UserDetailsDto] })
   @Auth([UserType.ADMIN, UserType.MANAGER])
-  public async listUsers(): Promise<UserDetailsDto[]> {
-    const users: UserEntity[] = await this.userService.listUsers();
+  public async listUsers(@User() user: UserEntity): Promise<UserDetailsDto[]> {
+    const users: UserEntity[] = await this.userService.listUsers({
+      withDeleted: user.type === UserType.ADMIN,
+      types: ACCESSIBLE_TYPES[user.type],
+    });
 
     return this.mapper.map(users, UserDetailsDto);
   }
